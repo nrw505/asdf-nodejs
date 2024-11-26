@@ -57,7 +57,8 @@ To address this, we offer an escape hatch for legacy version files. If you are
 comfortable with non-reproducibility issues, you can choose between strategies
 in a custom environment variable `ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY`. You
 can export this variable from your shell rc file and it will become the default
-behavior.
+behavior. You can also set it in `$HOME/.asdfrc` as
+`nodejs_legacy_file_dynamic_strategy = value`
 
 > **This option is only available for legacy version files (.nvmrc and
 > .node-version, at the moment), for that you will need to set

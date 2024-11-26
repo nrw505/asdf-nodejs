@@ -5,6 +5,9 @@ set -eu -o pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../utils.sh"
 
 legacy_strat="${ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY-}"
+if [ -s "$legacy_strat" ]; then
+	legacy_strat=$(get_asdf_config_value "nodejs_legacy_file_dynamic_strategy")
+fi
 queries=()
 
 for arg; do

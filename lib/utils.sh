@@ -9,6 +9,9 @@ fi
 
 export ASDF_NODEJS_PLUGIN_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 
+# ASDF utils.bash so we can use get_asdf_config_value
+. "${ASDF_NODEJS_PLUGIN_DIR}/../../lib/utils.bash"
+
 # TODO: Replace with an asdf variable once asdf starts providing the plugin name
 # as a variable
 export ASDF_NODEJS_PLUGIN_NAME=$(basename "$ASDF_NODEJS_PLUGIN_DIR")
@@ -154,6 +157,9 @@ resolve_version() {
     query="${nodejs_codenames[${#nodejs_codenames[@]} - 1]#*:}"
   fi
 
+  if [ -z "${ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY}" ]; then
+    ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY=$(get_asdf_config_value "nodejs_legacy_file_dynamic_strategy")
+  fi
   if [ "${ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY-}" ]; then
     query=$(resolve_legacy_version "$ASDF_NODEJS_LEGACY_FILE_DYNAMIC_STRATEGY" "$query")
   fi
